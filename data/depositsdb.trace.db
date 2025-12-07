@@ -1,0 +1,53 @@
+2025-12-07 00:33:34.947658+05:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: Объект уже закрыт
+The object is already closed [90007-224]
+2025-12-07 00:33:35.110694+05:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: Объект уже закрыт
+The object is already closed [90007-224]
+2025-12-07 00:33:35.396759+05:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: Объект уже закрыт
+The object is already closed [90007-224]
+2025-12-07 00:33:35.398759+05:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: Объект уже закрыт
+The object is already closed [90007-224]
+2025-12-07 00:33:35.400759+05:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: Объект уже закрыт
+The object is already closed [90007-224]
+2025-12-07 00:34:24.364805+05:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: Объект уже закрыт
+The object is already closed [90007-224]
+2025-12-07 00:35:02.693012+05:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: Объект уже закрыт
+The object is already closed [90007-224]
+2025-12-07 16:20:11.074850+05:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: Объект уже закрыт
+The object is already closed [90007-224]
+2025-12-07 20:53:22.644588+05:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: Объект уже закрыт
+The object is already closed [90007-224]
+2025-12-07 20:53:47.594441+05:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: Объект уже закрыт
+The object is already closed [90007-224]
+2025-12-07 20:59:52.253060+05:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: Объект уже закрыт
+The object is already closed [90007-224]
+2025-12-07 21:06:57.051871+05:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "[*]USERS"; ожидалось "UPDATE"
+Syntax error in SQL statement "[*]USERS"; expected "UPDATE"; SQL statement:
+USERS [42001-224]
+2025-12-07 21:07:05.051969+05:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "[*]USERS DEPOSITS"; ожидалось "UPDATE"
+Syntax error in SQL statement "[*]USERS DEPOSITS"; expected "UPDATE"; SQL statement:
+USERS DEPOSITS [42001-224]
+2025-12-07 21:07:05.338942+05:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "[*]USERS DEPOSITS"; ожидалось "UPDATE"
+Syntax error in SQL statement "[*]USERS DEPOSITS"; expected "UPDATE"; SQL statement:
+USERS DEPOSITS [42001-224]
+2025-12-07 21:07:05.786241+05:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "[*]USERS DEPOSITS"; ожидалось "UPDATE"
+Syntax error in SQL statement "[*]USERS DEPOSITS"; expected "UPDATE"; SQL statement:
+USERS DEPOSITS [42001-224]
+2025-12-07 21:07:38.027855+05:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "[*]DEPOSITS"; ожидалось "DELETE, DROP"
+Syntax error in SQL statement "[*]DEPOSITS"; expected "DELETE, DROP"; SQL statement:
+DEPOSITS [42001-224]
