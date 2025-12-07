@@ -205,15 +205,18 @@ public class DepositEntity {
 
 ### Главная страница
 
-(вставить изображение — таблица депозитов)
+<img width="974" height="468" alt="image" src="https://github.com/user-attachments/assets/f452fe1c-7bc8-42f4-b3a2-bf8d3c5ad56f" />
+
 
 ### Авторизация
 
-(вставить изображение — login форма)
+<img width="588" height="533" alt="image" src="https://github.com/user-attachments/assets/1a6e6e22-0885-43c7-98a5-209c60383fac" />
+
 
 ### Админ-панель
 
-(вставить изображение — управление депозитами)
+<img width="974" height="243" alt="image" src="https://github.com/user-attachments/assets/9f0c7b5f-f67b-4f12-b18e-2d82c340ce1d" />
+
 
 ---
 
