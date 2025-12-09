@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Анализ депозитных предложений</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-premium mb-4">
+    <div class="container-fluid">
+
+        <!-- ЛЕВАЯ ЧАСТЬ -->
+        <div class="d-flex align-items-center gap-2">
+            <span class="badge-brand">Deposit AI</span>
+            <a class="navbar-brand" href="/">Анализ депозитных предложений</a>
+        </div>
+
+        <!-- ПРАВАЯ ЧАСТЬ -->
+        <div class="d-flex align-items-center">
+
+            <!-- Приветствие -->
+            <span class="nav-user">
+                Привет,
+                <b th:text="${username != null ? username : 'Гость'}"></b>
+            </span>
+
+            <!-- Кнопка админ-панели -->
+            <a href="/admin/deposits" class="btn btn-outline-warning btn-sm ms-3">
+                Админ-панель
+            </a>
+
+            <!-- Кнопка ВЫЙТИ -->
+            <div th:if="${username != null}">
+                <a href="/logout" class="btn btn-outline-light btn-sm ms-3">Выйти</a>
+            </div>
+
+        </div>
+
+    </div>
+</nav>
+
+<!-- ОСНОВНОЙ КОНТЕНТ -->
+<div class="container mb-4">
+    <div class="row g-4">
+
+        <!-- ЛЕВАЯ КОЛОНКА -->
+        <div class="col-lg-8">
+            <div class="glass-card">
+                <div class="glass-card-header">
+                    <div>
+                        <div class="glass-card-title">Депозитные предложения</div>
+                        <div class="glass-card-subtitle">Актуальные продукты</div>
+                    </div>
+
+                    <span class="badge-pill-soft"
+                          th:text="${#lists.size(deposits)} + ' предложений'">
+                        0 предложений
+                    </span>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-dark-glass table-hover align-middle mb-0">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Банк</th>
+                            <th>Ставка, %</th>
+                            <th>Мин. сумма</th>
+                            <th>Срок, мес</th>
+                            <th>Тип</th>
+                            <th>Действия</th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+
+                        <!-- ОТРИСОВКА ВСЕХ ДЕПОЗИТОВ -->
+                        <tr th:each="d : ${deposits}">
+                            <td th:text="${d.id}"></td>
+                            <td th:text="${d.bankName}"></td>
+                            <td th:text="${d.interestRate}"></td>
+                            <td th:text="${d.minAmount}"></td>
+                            <td th:text="${d.periodMonths}"></td>
+                            <td th:text="${d.type}"></td>
+
+                            <!-- Кнопки доступны ТОЛЬКО владельцу -->
+                            <td>
+                                <div th:if="${username != null
+                                    and d.owner != null
+                                    and d.owner.username eq username}">
+
+                                    <a th:href="@{'/deposits/edit/' + ${d.id}}"
+                                       class="btn btn-warning btn-sm">
+                                        Изменить
+                                    </a>
+
+                                    <a th:href="@{'/deposits/delete/' + ${d.id}}"
+                                       class="btn btn-danger btn-sm"
+                                       onclick="return confirm('Удалить?')">
+                                        Удалить
+                                    </a>
+
+                                </div>
+                            </td>
+                        </tr>
+
+                        <!-- Если депозитов нет -->
+                        <tr th:if="${#lists.isEmpty(deposits)}">
+                            <td colspan="7" class="text-center text-muted">
+                                Пока нет ни одного депозита.
+                            </td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ПРАВАЯ КОЛОНКА -->
+        <div class="col-lg-4">
+
+            <!-- Добавление депозита -->
+            <div class="glass-card mb-3">
+                <div class="glass-card-header">
+                    <div>
+                        <div class="glass-card-title">Новый депозит</div>
+                        <div class="glass-card-subtitle">Добавьте продукт</div>
+                    </div>
+                </div>
+
+                <form method="post" action="/deposits/add">
+                    <div class="mb-2">
+                        <label class="form-label">Банк</label>
+                        <input type="text" name="bankName" class="form-control" required>
+                    </div>
+
+                    <div class="mb-2">
+                        <label class="form-label">Ставка (%)</label>
+                        <input type="number" name="rate" step="0.01" class="form-control" required>
+                    </div>
+
+                    <div class="mb-2">
+                        <label class="form-label">Мин. сумма</label>
+                        <input type="number" name="minAmount" step="0.01" class="form-control" required>
+                    </div>
+
+                    <div class="mb-2">
+                        <label class="form-label">Срок (мес)</label>
+                        <input type="number" name="periodMonths" class="form-control" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Тип депозита</label>
+                        <select name="type" class="form-select" required>
+                            <option th:each="t : ${types}" th:value="${t}" th:text="${t}"></option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100">Сохранить</button>
+                </form>
+            </div>
+
+            <!-- Расчёт доходности -->
+            <div class="glass-card mb-3">
+                <div class="glass-card-header">
+                    <div>
+                        <div class="glass-card-title">Расчёт доходности</div>
+                        <div class="glass-card-subtitle">Оцените доход</div>
+                    </div>
+                </div>
+
+                <form method="post" action="/deposits/calc">
+                    <div class="mb-2">
+                        <label class="form-label">Депозит</label>
+                        <select name="depositId" class="form-select" required>
+                            <option th:each="d : ${deposits}"
+                                    th:value="${d.id}"
+                                    th:text="${d.bankName} + ' (' + ${d.type} + ')'">
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Сумма вклада</label>
+                        <input type="number" name="amount" step="0.01" class="form-control" required>
+                    </div>
+
+                    <button type="submit" class="btn btn-success w-100">Рассчитать доход</button>
+                </form>
+
+                <div th:if="${incomeResult != null}" class="alert alert-info mt-3">
+                    Доход:
+                    <span th:text="${incomeResult}"></span>
+                </div>
+            </div>
+
+            <!-- Лучший депозит -->
+            <div class="glass-card">
+                <div class="glass-card-header">
+                    <div>
+                        <div class="glass-card-title">Лучший депозит</div>
+                        <div class="glass-card-subtitle">Максимальная доходность</div>
+                    </div>
+                </div>
+
+                <form method="post" action="/deposits/best">
+                    <div class="mb-3">
+                        <label class="form-label">Сумма вклада</label>
+                        <input type="number" name="amount" step="0.01" class="form-control" required>
+                    </div>
+
+                    <button type="submit" class="btn btn-warning w-100">
+                        Найти лучший
+                    </button>
+                </form>
+
+                <div th:if="${bestBank != null}" class="alert alert-warning mt-3">
+                    Лучший банк: <strong th:text="${bestBank}"></strong><br>
+                    Доход: <span th:text="${incomeResult}"></span>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>
